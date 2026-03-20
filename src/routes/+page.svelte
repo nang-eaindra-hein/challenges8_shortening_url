@@ -1,12 +1,16 @@
 <script lang="ts">
   import AboutCards from "$lib/components/AboutCards.svelte";
+  import Foot from "$lib/components/Foot.svelte";
   import Nav from "$lib/components/Nav.svelte";
+
+  let linkResult = $state(true);
+  let copyText = $state(false);
 </script>
 
 <div class="w-full min-h-screen">
   <Nav />
 
-  <div class="text-center px-6">
+  <div class="text-center px-6 pb-10">
     <img
       src="/images/illustration-working.png"
       alt="illustration-working"
@@ -45,6 +49,25 @@
         >
       </div>
     </div>
+    {#if linkResult}
+      <div class="bg-white rounded-lg py-3">
+        <div class=" text-start p-3">link</div>
+        <hr class="text-stone-300" />
+        <div class="px-3">
+          <div class="text-teal-300 p-3 text-start">link</div>
+          {#if !copyText}
+            <button
+              class="py-2 rounded-sm hover:bg-indigo-950 bg-teal-300 w-full text-center text-white font-bold text-sm"
+              onclick={() => (copyText = true)}>Copy</button
+            >{:else}
+            <button
+              class="py-2 rounded-sm bg-indigo-950 w-full text-center text-white font-bold text-sm"
+              >Copied!</button
+            >
+          {/if}
+        </div>
+      </div>
+    {/if}
     <!--advanced statistics-->
     <h1 class="text-xl font-bold text-center">Advanced Statistics</h1>
     <p class="py-10 text-sm font-semibold text-stone-400">
@@ -76,4 +99,6 @@
       />
     </div>
   </div>
+  <!--foot-->
+  <Foot />
 </div>
